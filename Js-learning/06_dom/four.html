@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Learning and Manipulation</title>
+</head>
+<body>
+      <ul class="language">
+        <li>Javascript</li>
+      </ul>
+</body>
+<script>
+    
+    function addLanguage(langName) {
+        const newLi = document.createElement("li");
+        newLi.innerHTML = `${langName}`;
+
+        const ul = document.querySelector(".language");
+        ul.appendChild(newLi);
+
+    }
+
+    addLanguage("Python")
+    addLanguage("TypeScript")
+
+
+    function addOptiLanguage(langName) {
+        const newLi = document.createElement("li")
+        newLi.appendChild(document.createTextNode(langName))
+        document.querySelector(".language").appendChild(newLi)
+    }
+
+    addOptiLanguage("goLang")
+
+
+    //Edit
+
+    const secondLang = document.querySelector("li:nth-child(2)")
+    // secondLang.innerHTML = "Mojo"  //Not a optimized approach because document needs to traverse whole tree to get here
+    const newLi = document.createElement("li")  //optimized approach
+    newLi.textContent = "Mojo"
+    secondLang.replaceWith(newLi)
+
+    //edit
+
+    const firstLang = document.querySelector("li:first-child")
+    firstLang.outerHTML = "<li>Java</li>"
+
+
+    //remove
+
+    const lastLang = document.querySelector("li:last-child")
+    lastLang.remove()
+
+</script>
+</html>
