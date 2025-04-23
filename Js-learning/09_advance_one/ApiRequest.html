@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request Response</title>
+    <style>
+        .card {
+            width: 200px;
+            height: 300px;
+            background-color: gray;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 30px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+       <div class="card hidden">
+           <img id="avatar" src="" alt="">
+           <span id="followers-count"></span>
+       </div>
+       <button id="get-data-btn">Get Data</button>
+</body>
+<script>
+       
+       const card = document.querySelector(".card")
+       const cardImage = document.querySelector("#avatar")
+       const followersCount = document.querySelector("#followers-count")
+       const dataBtn = document.querySelector("#get-data-btn")
+
+       dataBtn.addEventListener("click", () => {
+
+
+       const requestUrl = "https://api.github.com/users/hiteshchoudhary"
+
+       const xhr = new XMLHttpRequest()
+       xhr.open("GET", requestUrl)
+       xhr.onreadystatechange = function() {
+          console.log(xhr.readyState)
+          if (xhr.readyState === 4) {
+            const data = JSON.parse(this.responseText)
+            console.log(data)
+           cardImage.setAttribute("src", data.avatar_url)
+           followersCount.innerHTML = `Followers: ${data.followers}`
+        }
+    }
+    xhr.send()
+
+      card.classList.remove("hidden")
+        
+})
+
+       
+</script>
+</html>
